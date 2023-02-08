@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.JLinkScript": "plaintext",
+			"hw_intf_spec.hpp": "cpp"
+		},
+		"cSpell.words": [
+			"netif"
+		]
+	}
+}

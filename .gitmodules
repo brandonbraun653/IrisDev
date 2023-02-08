@@ -1,0 +1,6 @@
+[submodule "Iris"]
+	path = Iris
+	url = https://github.com/brandonbraun653/Iris.git
+[submodule "lib/etl"]
+	path = lib/etl
+	url = https://github.com/ETLCPP/etl.git

@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.JLinkScript": "plaintext",
+    "hw_intf_spec.hpp": "c"
+  }
+}
