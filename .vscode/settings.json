@@ -1,6 +1,6 @@
 {
   "files.associations": {
     "*.JLinkScript": "plaintext",
-    "hw_intf_spec.hpp": "c"
+    "physical_types.hpp": "c"
   }
 }

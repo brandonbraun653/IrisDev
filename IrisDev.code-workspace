@@ -7,7 +7,7 @@
 	"settings": {
 		"files.associations": {
 			"*.JLinkScript": "plaintext",
-			"hw_intf_spec.hpp": "cpp"
+			"physical_types.hpp": "cpp"
 		},
 		"cSpell.words": [
 			"netif"
