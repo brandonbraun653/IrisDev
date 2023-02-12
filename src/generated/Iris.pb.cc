@@ -110,15 +110,16 @@ const char descriptor_table_protodef_Iris_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "ris.DataBuffer\032\020.Iris.StatusCode\0226\n\nGetM"
   "essage\022\026.google.protobuf.Empty\032\020.Iris.Da"
   "taBuffer\022A\n\024SetNetworkParameters\022\027.Iris."
-  "NetworkParameters\032\020.Iris.StatusCodeb\006pro"
-  "to3"
+  "NetworkParameters\032\020.Iris.StatusCode2;\n\007N"
+  "etPipe\0220\n\nPutMessage\022\020.Iris.DataBuffer\032\020"
+  ".Iris.StatusCodeb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Iris_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Iris_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Iris_2eproto = {
-    false, false, 403, descriptor_table_protodef_Iris_2eproto,
+    false, false, 464, descriptor_table_protodef_Iris_2eproto,
     "Iris.proto",
     &descriptor_table_Iris_2eproto_once, descriptor_table_Iris_2eproto_deps, 1, 3,
     schemas, file_default_instances, TableStruct_Iris_2eproto::offsets,

@@ -24,3 +24,8 @@ service TestService {
     rpc GetMessage(google.protobuf.Empty) returns (DataBuffer);
     rpc SetNetworkParameters(NetworkParameters) returns (StatusCode);
 }
+
+
+service NetPipe {
+    rpc PutMessage(DataBuffer) returns (StatusCode);
+}

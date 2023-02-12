@@ -166,5 +166,66 @@ TestService::Service::~Service() {
 }
 
 
+static const char* NetPipe_method_names[] = {
+  "/Iris.NetPipe/PutMessage",
+};
+
+std::unique_ptr< NetPipe::Stub> NetPipe::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
+  (void)options;
+  std::unique_ptr< NetPipe::Stub> stub(new NetPipe::Stub(channel, options));
+  return stub;
+}
+
+NetPipe::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
+  : channel_(channel), rpcmethod_PutMessage_(NetPipe_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  {}
+
+::grpc::Status NetPipe::Stub::PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::Iris::StatusCode* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Iris::DataBuffer, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_PutMessage_, context, request, response);
+}
+
+void NetPipe::Stub::async::PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Iris::DataBuffer, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_PutMessage_, context, request, response, std::move(f));
+}
+
+void NetPipe::Stub::async::PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_PutMessage_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* NetPipe::Stub::PrepareAsyncPutMessageRaw(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Iris::StatusCode, ::Iris::DataBuffer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_PutMessage_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* NetPipe::Stub::AsyncPutMessageRaw(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncPutMessageRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+NetPipe::Service::Service() {
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      NetPipe_method_names[0],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< NetPipe::Service, ::Iris::DataBuffer, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](NetPipe::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Iris::DataBuffer* req,
+             ::Iris::StatusCode* resp) {
+               return service->PutMessage(ctx, req, resp);
+             }, this)));
+}
+
+NetPipe::Service::~Service() {
+}
+
+::grpc::Status NetPipe::Service::PutMessage(::grpc::ServerContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+
 }  // namespace Iris
 

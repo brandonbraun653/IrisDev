@@ -13,6 +13,7 @@ Includes
 -----------------------------------------------------------------------------*/
 #include <argparse/argparse.hpp>
 #include <src/test_service.hpp>
+#include <src/net_pipe.hpp>
 #include <thread>
 
 /*-----------------------------------------------------------------------------
@@ -40,14 +41,26 @@ int main( int argc, char **argv )
     std::exit( 1 );
   }
 
+  /*---------------------------------------------------------------------------
+  Validate the port numbers
+  ---------------------------------------------------------------------------*/
   auto rpc_port = program.get<int>( "rpc_port" );
   auto net_port = program.get<int>( "net_port" );
+
+  if( rpc_port == net_port )
+  {
+    std::cout << "RPC and networking ports cannot be the same" << std::endl;
+    std::exit( 1 );
+  }
 
   /*---------------------------------------------------------------------------
   Start the test service thread
   ---------------------------------------------------------------------------*/
   std::string rpc_address = "0.0.0.0:" + std::to_string( rpc_port );
   std::thread rpc_thread( Iris::Dev::TestServiceThread, rpc_address );
+
+  std::string net_address = "0.0.0.0:" + std::to_string( net_port );
+  std::thread net_thread( Iris::Dev::NetPipeThread, net_address );
 
   /*---------------------------------------------------------------------------
   Run the networking application
@@ -57,6 +70,8 @@ int main( int argc, char **argv )
   /*---------------------------------------------------------------------------
   Tear down the servers
   ---------------------------------------------------------------------------*/
+  Iris::Dev::RPCNetPipeServer->Shutdown();
+  net_thread.join();
   Iris::Dev::RPCTestServer->Shutdown();
   rpc_thread.join();
 }

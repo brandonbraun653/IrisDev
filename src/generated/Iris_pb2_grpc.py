@@ -131,3 +131,64 @@ class TestService(object):
             Iris__pb2.StatusCode.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class NetPipeStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.PutMessage = channel.unary_unary(
+                '/Iris.NetPipe/PutMessage',
+                request_serializer=Iris__pb2.DataBuffer.SerializeToString,
+                response_deserializer=Iris__pb2.StatusCode.FromString,
+                )
+
+
+class NetPipeServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def PutMessage(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_NetPipeServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'PutMessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutMessage,
+                    request_deserializer=Iris__pb2.DataBuffer.FromString,
+                    response_serializer=Iris__pb2.StatusCode.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'Iris.NetPipe', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class NetPipe(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def PutMessage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Iris.NetPipe/PutMessage',
+            Iris__pb2.DataBuffer.SerializeToString,
+            Iris__pb2.StatusCode.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

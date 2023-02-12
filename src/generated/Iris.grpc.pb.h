@@ -548,6 +548,213 @@ class TestService final {
   typedef WithStreamedUnaryMethod_PutMessage<WithStreamedUnaryMethod_GetMessage<WithStreamedUnaryMethod_SetNetworkParameters<Service > > > StreamedService;
 };
 
+class NetPipe final {
+ public:
+  static constexpr char const* service_full_name() {
+    return "Iris.NetPipe";
+  }
+  class StubInterface {
+   public:
+    virtual ~StubInterface() {}
+    virtual ::grpc::Status PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::Iris::StatusCode* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>> AsyncPutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>>(AsyncPutMessageRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>> PrepareAsyncPutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>>(PrepareAsyncPutMessageRaw(context, request, cq));
+    }
+    class async_interface {
+     public:
+      virtual ~async_interface() {}
+      virtual void PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+    };
+    typedef class async_interface experimental_async_interface;
+    virtual class async_interface* async() { return nullptr; }
+    class async_interface* experimental_async() { return async(); }
+   private:
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* AsyncPutMessageRaw(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* PrepareAsyncPutMessageRaw(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) = 0;
+  };
+  class Stub final : public StubInterface {
+   public:
+    Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+    ::grpc::Status PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::Iris::StatusCode* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>> AsyncPutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>>(AsyncPutMessageRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>> PrepareAsyncPutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>>(PrepareAsyncPutMessageRaw(context, request, cq));
+    }
+    class async final :
+      public StubInterface::async_interface {
+     public:
+      void PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) override;
+      void PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) override;
+     private:
+      friend class Stub;
+      explicit async(Stub* stub): stub_(stub) { }
+      Stub* stub() { return stub_; }
+      Stub* stub_;
+    };
+    class async* async() override { return &async_stub_; }
+
+   private:
+    std::shared_ptr< ::grpc::ChannelInterface> channel_;
+    class async async_stub_{this};
+    ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* AsyncPutMessageRaw(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* PrepareAsyncPutMessageRaw(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::grpc::CompletionQueue* cq) override;
+    const ::grpc::internal::RpcMethod rpcmethod_PutMessage_;
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
+
+  class Service : public ::grpc::Service {
+   public:
+    Service();
+    virtual ~Service();
+    virtual ::grpc::Status PutMessage(::grpc::ServerContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response);
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_PutMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_PutMessage() {
+      ::grpc::Service::MarkMethodAsync(0);
+    }
+    ~WithAsyncMethod_PutMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PutMessage(::grpc::ServerContext* /*context*/, const ::Iris::DataBuffer* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestPutMessage(::grpc::ServerContext* context, ::Iris::DataBuffer* request, ::grpc::ServerAsyncResponseWriter< ::Iris::StatusCode>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_PutMessage<Service > AsyncService;
+  template <class BaseClass>
+  class WithCallbackMethod_PutMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_PutMessage() {
+      ::grpc::Service::MarkMethodCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::Iris::DataBuffer, ::Iris::StatusCode>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response) { return this->PutMessage(context, request, response); }));}
+    void SetMessageAllocatorFor_PutMessage(
+        ::grpc::MessageAllocator< ::Iris::DataBuffer, ::Iris::StatusCode>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::Iris::DataBuffer, ::Iris::StatusCode>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_PutMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PutMessage(::grpc::ServerContext* /*context*/, const ::Iris::DataBuffer* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* PutMessage(
+      ::grpc::CallbackServerContext* /*context*/, const ::Iris::DataBuffer* /*request*/, ::Iris::StatusCode* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_PutMessage<Service > CallbackService;
+  typedef CallbackService ExperimentalCallbackService;
+  template <class BaseClass>
+  class WithGenericMethod_PutMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_PutMessage() {
+      ::grpc::Service::MarkMethodGeneric(0);
+    }
+    ~WithGenericMethod_PutMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PutMessage(::grpc::ServerContext* /*context*/, const ::Iris::DataBuffer* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_PutMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_PutMessage() {
+      ::grpc::Service::MarkMethodRaw(0);
+    }
+    ~WithRawMethod_PutMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PutMessage(::grpc::ServerContext* /*context*/, const ::Iris::DataBuffer* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestPutMessage(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_PutMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_PutMessage() {
+      ::grpc::Service::MarkMethodRawCallback(0,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->PutMessage(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_PutMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status PutMessage(::grpc::ServerContext* /*context*/, const ::Iris::DataBuffer* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* PutMessage(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_PutMessage : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_PutMessage() {
+      ::grpc::Service::MarkMethodStreamed(0,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::Iris::DataBuffer, ::Iris::StatusCode>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::Iris::DataBuffer, ::Iris::StatusCode>* streamer) {
+                       return this->StreamedPutMessage(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_PutMessage() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status PutMessage(::grpc::ServerContext* /*context*/, const ::Iris::DataBuffer* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedPutMessage(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Iris::DataBuffer,::Iris::StatusCode>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_PutMessage<Service > StreamedUnaryService;
+  typedef Service SplitStreamedService;
+  typedef WithStreamedUnaryMethod_PutMessage<Service > StreamedService;
+};
+
 }  // namespace Iris
 
 

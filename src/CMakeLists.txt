@@ -1,5 +1,6 @@
 add_executable(IrisTestClient
   grpc_application.cpp
+  net_pipe.cpp
   test_service.cpp
   generated/Iris.grpc.pb.cc
   generated/Iris.pb.cc
