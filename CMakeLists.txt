@@ -8,3 +8,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
+find_package(absl REQUIRED PATHS ${PROJECT_ROOT}/artifacts/lib/cmake/absl)
+find_package(Protobuf REQUIRED PATHS ${PROJECT_ROOT}/artifacts/lib/cmake/protobuf)
+find_package(gRPC REQUIRED PATHS ${PROJECT_ROOT}/artifacts/lib/cmake/grpc)
+
+add_subdirectory(src)

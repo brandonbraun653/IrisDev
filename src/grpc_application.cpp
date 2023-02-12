@@ -1,0 +1,64 @@
+/******************************************************************************
+ *  File Name:
+ *    test_server.cpp
+ *
+ *  Description:
+ *    Main entry point to the test server application
+ *
+ *  2023 | Brandon Braun | brandonbraun653@protonmail.com
+ *****************************************************************************/
+
+/*-----------------------------------------------------------------------------
+Includes
+-----------------------------------------------------------------------------*/
+#include <argparse/argparse.hpp>
+#include <src/test_service.hpp>
+#include <thread>
+
+/*-----------------------------------------------------------------------------
+Static Data
+-----------------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------------------
+Public Functions
+-----------------------------------------------------------------------------*/
+int main( int argc, char **argv )
+{
+  argparse::ArgumentParser program( "test_server" );
+  program.add_argument( "rpc_port" ).help( "External port for RPC" ).scan<'i', int>();
+  program.add_argument( "net_port" ).help( "Internal port for P2P networking" ).scan<'i', int>();
+
+  try
+  {
+    program.parse_args( argc, argv );
+  }
+  catch( const std::runtime_error &err )
+  {
+    std::cout << err.what() << std::endl;
+    std::cout << program;
+    std::exit( 1 );
+  }
+
+  auto rpc_port = program.get<int>( "rpc_port" );
+  auto net_port = program.get<int>( "net_port" );
+
+  /*---------------------------------------------------------------------------
+  Start the test service thread
+  ---------------------------------------------------------------------------*/
+  std::string rpc_address = "0.0.0.0:" + std::to_string( rpc_port );
+  std::thread rpc_thread( Iris::Dev::TestServiceThread, rpc_address );
+
+  /*---------------------------------------------------------------------------
+  Run the networking application
+  ---------------------------------------------------------------------------*/
+  std::this_thread::sleep_for( std::chrono::seconds( 5 ) );
+
+  /*---------------------------------------------------------------------------
+  Tear down the servers
+  ---------------------------------------------------------------------------*/
+  Iris::Dev::RPCTestServer->Shutdown();
+  rpc_thread.join();
+}
+
+

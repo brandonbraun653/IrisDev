@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package Iris;
+
+message StatusCode {
+  enum Code {
+    OK = 0;
+    ERROR = 1;
+  }
+
+  Code status = 1;
+}
+
+message DataBuffer {
+  bytes data = 1;
+}
+
+message NetworkParameters {
+  float frameLossProbability = 1;
+}
+
+service TestService {
+    rpc PutMessage(DataBuffer) returns (StatusCode);
+    rpc GetMessage(google.protobuf.Empty) returns (DataBuffer);
+    rpc SetNetworkParameters(NetworkParameters) returns (StatusCode);
+}
