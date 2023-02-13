@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nIris.proto\x12\x04Iris\x1a\x1bgoogle/protobuf/empty.proto\"N\n\nStatusCode\x12%\n\x06status\x18\x01 \x01(\x0e\x32\x15.Iris.StatusCode.Code\"\x19\n\x04\x43ode\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"+\n\nDataBuffer\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x0f\n\x07\x64stPort\x18\x02 \x01(\r\"1\n\x11NetworkParameters\x12\x1c\n\x14\x66rameLossProbability\x18\x01 \x01(\x02\"\x1a\n\nSocketInfo\x12\x0c\n\x04port\x18\x01 \x01(\r2\xdb\x02\n\x0bTestService\x12\x30\n\nPutMessage\x12\x10.Iris.DataBuffer\x1a\x10.Iris.StatusCode\x12\x36\n\nGetMessage\x12\x16.google.protobuf.Empty\x1a\x10.Iris.DataBuffer\x12\x41\n\x14SetNetworkParameters\x12\x17.Iris.NetworkParameters\x1a\x10.Iris.StatusCode\x12\x36\n\x04Kill\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12\x32\n\x0c\x43reateSocket\x12\x10.Iris.SocketInfo\x1a\x10.Iris.StatusCode\x12\x33\n\rDestroySocket\x12\x10.Iris.SocketInfo\x1a\x10.Iris.StatusCode2;\n\x07NetPipe\x12\x30\n\nPutMessage\x12\x10.Iris.DataBuffer\x1a\x10.Iris.StatusCodeb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nIris.proto\x12\x04Iris\x1a\x1bgoogle/protobuf/empty.proto\"N\n\nStatusCode\x12%\n\x06status\x18\x01 \x01(\x0e\x32\x15.Iris.StatusCode.Code\"\x19\n\x04\x43ode\x12\x06\n\x02OK\x10\x00\x12\t\n\x05\x45RROR\x10\x01\"-\n\nDataBuffer\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x11\n\tsock_port\x18\x02 \x01(\r\"1\n\x11NetworkParameters\x12\x1c\n\x14\x66rameLossProbability\x18\x01 \x01(\x02\"\x1f\n\nSocketInfo\x12\x11\n\tsock_port\x18\x01 \x01(\r2\xd5\x02\n\x0bTestService\x12\x30\n\nPutMessage\x12\x10.Iris.DataBuffer\x1a\x10.Iris.StatusCode\x12\x30\n\nGetMessage\x12\x10.Iris.SocketInfo\x1a\x10.Iris.DataBuffer\x12\x41\n\x14SetNetworkParameters\x12\x17.Iris.NetworkParameters\x1a\x10.Iris.StatusCode\x12\x36\n\x04Kill\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12\x32\n\x0c\x43reateSocket\x12\x10.Iris.SocketInfo\x1a\x10.Iris.StatusCode\x12\x33\n\rDestroySocket\x12\x10.Iris.SocketInfo\x1a\x10.Iris.StatusCode2;\n\x07NetPipe\x12\x30\n\nPutMessage\x12\x10.Iris.DataBuffer\x1a\x10.Iris.StatusCodeb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'Iris_pb2', globals())
@@ -26,13 +26,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _STATUSCODE_CODE._serialized_start=102
   _STATUSCODE_CODE._serialized_end=127
   _DATABUFFER._serialized_start=129
-  _DATABUFFER._serialized_end=172
-  _NETWORKPARAMETERS._serialized_start=174
-  _NETWORKPARAMETERS._serialized_end=223
-  _SOCKETINFO._serialized_start=225
-  _SOCKETINFO._serialized_end=251
-  _TESTSERVICE._serialized_start=254
-  _TESTSERVICE._serialized_end=601
-  _NETPIPE._serialized_start=603
-  _NETPIPE._serialized_end=662
+  _DATABUFFER._serialized_end=174
+  _NETWORKPARAMETERS._serialized_start=176
+  _NETWORKPARAMETERS._serialized_end=225
+  _SOCKETINFO._serialized_start=227
+  _SOCKETINFO._serialized_end=258
+  _TESTSERVICE._serialized_start=261
+  _TESTSERVICE._serialized_end=602
+  _NETPIPE._serialized_start=604
+  _NETPIPE._serialized_end=663
 # @@protoc_insertion_point(module_scope)

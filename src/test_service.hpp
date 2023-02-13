@@ -48,7 +48,7 @@ namespace Iris::Dev
   public:
     ::grpc::Status PutMessage( ::grpc::ServerContext *context, const ::Iris::DataBuffer *request,
                                ::Iris::StatusCode *response ) override;
-    ::grpc::Status GetMessage( ::grpc::ServerContext *context, const ::google::protobuf::Empty *request,
+    ::grpc::Status GetMessage( ::grpc::ServerContext *context, const ::Iris::SocketInfo* request,
                                ::Iris::DataBuffer *response ) override;
     ::grpc::Status SetNetworkParameters( ::grpc::ServerContext *context, const ::Iris::NetworkParameters *request,
                                          ::Iris::StatusCode *response ) override;
@@ -65,12 +65,12 @@ namespace Iris::Dev
     struct SockResource
     {
       Iris::Session::Socket  *sock;
-      Transport::DfltTXQueue  s_tx_queue;
-      Transport::DfltRXQueue  s_rx_queue;
-      Physical::DfltFramePool s_frame_pool;
+      etl::queue_spsc_atomic<Transport::Packet, 32> tx_queue;
+      etl::queue_spsc_atomic<Transport::Packet, 32> rx_queue;
+      etl::pool<Physical::Frame, 128> frame_pool;
     };
 
-    std::map<uint32_t, SockResource*> mSockets;
+    std::map<uint32_t, std::shared_ptr<SockResource>> mSockets;
   };
 
 

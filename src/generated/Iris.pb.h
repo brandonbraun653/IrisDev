@@ -395,7 +395,7 @@ class DataBuffer final :
 
   enum : int {
     kDataFieldNumber = 1,
-    kDstPortFieldNumber = 2,
+    kSockPortFieldNumber = 2,
   };
   // bytes data = 1;
   void clear_data();
@@ -411,13 +411,13 @@ class DataBuffer final :
   std::string* _internal_mutable_data();
   public:
 
-  // uint32 dstPort = 2;
-  void clear_dstport();
-  uint32_t dstport() const;
-  void set_dstport(uint32_t value);
+  // uint32 sock_port = 2;
+  void clear_sock_port();
+  uint32_t sock_port() const;
+  void set_sock_port(uint32_t value);
   private:
-  uint32_t _internal_dstport() const;
-  void _internal_set_dstport(uint32_t value);
+  uint32_t _internal_sock_port() const;
+  void _internal_set_sock_port(uint32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:Iris.DataBuffer)
@@ -429,7 +429,7 @@ class DataBuffer final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
-    uint32_t dstport_;
+    uint32_t sock_port_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -706,15 +706,15 @@ class SocketInfo final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPortFieldNumber = 1,
+    kSockPortFieldNumber = 1,
   };
-  // uint32 port = 1;
-  void clear_port();
-  uint32_t port() const;
-  void set_port(uint32_t value);
+  // uint32 sock_port = 1;
+  void clear_sock_port();
+  uint32_t sock_port() const;
+  void set_sock_port(uint32_t value);
   private:
-  uint32_t _internal_port() const;
-  void _internal_set_port(uint32_t value);
+  uint32_t _internal_sock_port() const;
+  void _internal_set_sock_port(uint32_t value);
   public:
 
   // @@protoc_insertion_point(class_scope:Iris.SocketInfo)
@@ -725,7 +725,7 @@ class SocketInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    uint32_t port_;
+    uint32_t sock_port_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -816,24 +816,24 @@ inline void DataBuffer::set_allocated_data(std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:Iris.DataBuffer.data)
 }
 
-// uint32 dstPort = 2;
-inline void DataBuffer::clear_dstport() {
-  _impl_.dstport_ = 0u;
+// uint32 sock_port = 2;
+inline void DataBuffer::clear_sock_port() {
+  _impl_.sock_port_ = 0u;
 }
-inline uint32_t DataBuffer::_internal_dstport() const {
-  return _impl_.dstport_;
+inline uint32_t DataBuffer::_internal_sock_port() const {
+  return _impl_.sock_port_;
 }
-inline uint32_t DataBuffer::dstport() const {
-  // @@protoc_insertion_point(field_get:Iris.DataBuffer.dstPort)
-  return _internal_dstport();
+inline uint32_t DataBuffer::sock_port() const {
+  // @@protoc_insertion_point(field_get:Iris.DataBuffer.sock_port)
+  return _internal_sock_port();
 }
-inline void DataBuffer::_internal_set_dstport(uint32_t value) {
+inline void DataBuffer::_internal_set_sock_port(uint32_t value) {
   
-  _impl_.dstport_ = value;
+  _impl_.sock_port_ = value;
 }
-inline void DataBuffer::set_dstport(uint32_t value) {
-  _internal_set_dstport(value);
-  // @@protoc_insertion_point(field_set:Iris.DataBuffer.dstPort)
+inline void DataBuffer::set_sock_port(uint32_t value) {
+  _internal_set_sock_port(value);
+  // @@protoc_insertion_point(field_set:Iris.DataBuffer.sock_port)
 }
 
 // -------------------------------------------------------------------
@@ -864,24 +864,24 @@ inline void NetworkParameters::set_framelossprobability(float value) {
 
 // SocketInfo
 
-// uint32 port = 1;
-inline void SocketInfo::clear_port() {
-  _impl_.port_ = 0u;
+// uint32 sock_port = 1;
+inline void SocketInfo::clear_sock_port() {
+  _impl_.sock_port_ = 0u;
 }
-inline uint32_t SocketInfo::_internal_port() const {
-  return _impl_.port_;
+inline uint32_t SocketInfo::_internal_sock_port() const {
+  return _impl_.sock_port_;
 }
-inline uint32_t SocketInfo::port() const {
-  // @@protoc_insertion_point(field_get:Iris.SocketInfo.port)
-  return _internal_port();
+inline uint32_t SocketInfo::sock_port() const {
+  // @@protoc_insertion_point(field_get:Iris.SocketInfo.sock_port)
+  return _internal_sock_port();
 }
-inline void SocketInfo::_internal_set_port(uint32_t value) {
+inline void SocketInfo::_internal_set_sock_port(uint32_t value) {
   
-  _impl_.port_ = value;
+  _impl_.sock_port_ = value;
 }
-inline void SocketInfo::set_port(uint32_t value) {
-  _internal_set_port(value);
-  // @@protoc_insertion_point(field_set:Iris.SocketInfo.port)
+inline void SocketInfo::set_sock_port(uint32_t value) {
+  _internal_set_sock_port(value);
+  // @@protoc_insertion_point(field_set:Iris.SocketInfo.sock_port)
 }
 
 #ifdef __GNUC__

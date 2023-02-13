@@ -13,7 +13,7 @@ message StatusCode {
 
 message DataBuffer {
   bytes data = 1;
-  uint32 dstPort = 2;
+  uint32 sock_port = 2;
 }
 
 message NetworkParameters {
@@ -21,12 +21,12 @@ message NetworkParameters {
 }
 
 message SocketInfo {
-  uint32 port = 1;
+  uint32 sock_port = 1;
 }
 
 service TestService {
     rpc PutMessage(DataBuffer) returns (StatusCode);
-    rpc GetMessage(google.protobuf.Empty) returns (DataBuffer);
+    rpc GetMessage(SocketInfo) returns (DataBuffer);
     rpc SetNetworkParameters(NetworkParameters) returns (StatusCode);
     rpc Kill(google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc CreateSocket(SocketInfo) returns (StatusCode);

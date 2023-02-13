@@ -22,7 +22,7 @@ class TestServiceStub(object):
                 )
         self.GetMessage = channel.unary_unary(
                 '/Iris.TestService/GetMessage',
-                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                request_serializer=Iris__pb2.SocketInfo.SerializeToString,
                 response_deserializer=Iris__pb2.DataBuffer.FromString,
                 )
         self.SetNetworkParameters = channel.unary_unary(
@@ -96,7 +96,7 @@ def add_TestServiceServicer_to_server(servicer, server):
             ),
             'GetMessage': grpc.unary_unary_rpc_method_handler(
                     servicer.GetMessage,
-                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    request_deserializer=Iris__pb2.SocketInfo.FromString,
                     response_serializer=Iris__pb2.DataBuffer.SerializeToString,
             ),
             'SetNetworkParameters': grpc.unary_unary_rpc_method_handler(
@@ -158,7 +158,7 @@ class TestService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Iris.TestService/GetMessage',
-            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            Iris__pb2.SocketInfo.SerializeToString,
             Iris__pb2.DataBuffer.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

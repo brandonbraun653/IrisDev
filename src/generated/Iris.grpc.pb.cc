@@ -68,23 +68,23 @@ void TestService::Stub::async::PutMessage(::grpc::ClientContext* context, const 
   return result;
 }
 
-::grpc::Status TestService::Stub::GetMessage(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::Iris::DataBuffer* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::google::protobuf::Empty, ::Iris::DataBuffer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetMessage_, context, request, response);
+::grpc::Status TestService::Stub::GetMessage(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::Iris::DataBuffer* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Iris::SocketInfo, ::Iris::DataBuffer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetMessage_, context, request, response);
 }
 
-void TestService::Stub::async::GetMessage(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::Iris::DataBuffer* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::google::protobuf::Empty, ::Iris::DataBuffer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetMessage_, context, request, response, std::move(f));
+void TestService::Stub::async::GetMessage(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::DataBuffer* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Iris::SocketInfo, ::Iris::DataBuffer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetMessage_, context, request, response, std::move(f));
 }
 
-void TestService::Stub::async::GetMessage(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::Iris::DataBuffer* response, ::grpc::ClientUnaryReactor* reactor) {
+void TestService::Stub::async::GetMessage(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::DataBuffer* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetMessage_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::Iris::DataBuffer>* TestService::Stub::PrepareAsyncGetMessageRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Iris::DataBuffer, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetMessage_, context, request);
+::grpc::ClientAsyncResponseReader< ::Iris::DataBuffer>* TestService::Stub::PrepareAsyncGetMessageRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Iris::DataBuffer, ::Iris::SocketInfo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetMessage_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::Iris::DataBuffer>* TestService::Stub::AsyncGetMessageRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::Iris::DataBuffer>* TestService::Stub::AsyncGetMessageRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncGetMessageRaw(context, request, cq);
   result->StartCall();
@@ -197,10 +197,10 @@ TestService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       TestService_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< TestService::Service, ::google::protobuf::Empty, ::Iris::DataBuffer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< TestService::Service, ::Iris::SocketInfo, ::Iris::DataBuffer, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](TestService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::google::protobuf::Empty* req,
+             const ::Iris::SocketInfo* req,
              ::Iris::DataBuffer* resp) {
                return service->GetMessage(ctx, req, resp);
              }, this)));
@@ -256,7 +256,7 @@ TestService::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status TestService::Service::GetMessage(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::Iris::DataBuffer* response) {
+::grpc::Status TestService::Service::GetMessage(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::DataBuffer* response) {
   (void) context;
   (void) request;
   (void) response;

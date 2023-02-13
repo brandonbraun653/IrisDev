@@ -37,7 +37,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORIT
 PROTOBUF_CONSTEXPR DataBuffer::DataBuffer(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.data_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.dstport_)*/0u
+  , /*decltype(_impl_.sock_port_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct DataBufferDefaultTypeInternal {
   PROTOBUF_CONSTEXPR DataBufferDefaultTypeInternal()
@@ -63,7 +63,7 @@ struct NetworkParametersDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 NetworkParametersDefaultTypeInternal _NetworkParameters_default_instance_;
 PROTOBUF_CONSTEXPR SocketInfo::SocketInfo(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.port_)*/0u
+    /*decltype(_impl_.sock_port_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct SocketInfoDefaultTypeInternal {
   PROTOBUF_CONSTEXPR SocketInfoDefaultTypeInternal()
@@ -94,7 +94,7 @@ const uint32_t TableStruct_Iris_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Iris::DataBuffer, _impl_.data_),
-  PROTOBUF_FIELD_OFFSET(::Iris::DataBuffer, _impl_.dstport_),
+  PROTOBUF_FIELD_OFFSET(::Iris::DataBuffer, _impl_.sock_port_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Iris::NetworkParameters, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -108,7 +108,7 @@ const uint32_t TableStruct_Iris_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::Iris::SocketInfo, _impl_.port_),
+  PROTOBUF_FIELD_OFFSET(::Iris::SocketInfo, _impl_.sock_port_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Iris::StatusCode)},
@@ -128,27 +128,27 @@ const char descriptor_table_protodef_Iris_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\n\nIris.proto\022\004Iris\032\033google/protobuf/empt"
   "y.proto\"N\n\nStatusCode\022%\n\006status\030\001 \001(\0162\025."
   "Iris.StatusCode.Code\"\031\n\004Code\022\006\n\002OK\020\000\022\t\n\005"
-  "ERROR\020\001\"+\n\nDataBuffer\022\014\n\004data\030\001 \001(\014\022\017\n\007d"
-  "stPort\030\002 \001(\r\"1\n\021NetworkParameters\022\034\n\024fra"
-  "meLossProbability\030\001 \001(\002\"\032\n\nSocketInfo\022\014\n"
-  "\004port\030\001 \001(\r2\333\002\n\013TestService\0220\n\nPutMessag"
-  "e\022\020.Iris.DataBuffer\032\020.Iris.StatusCode\0226\n"
-  "\nGetMessage\022\026.google.protobuf.Empty\032\020.Ir"
-  "is.DataBuffer\022A\n\024SetNetworkParameters\022\027."
-  "Iris.NetworkParameters\032\020.Iris.StatusCode"
-  "\0226\n\004Kill\022\026.google.protobuf.Empty\032\026.googl"
-  "e.protobuf.Empty\0222\n\014CreateSocket\022\020.Iris."
-  "SocketInfo\032\020.Iris.StatusCode\0223\n\rDestroyS"
-  "ocket\022\020.Iris.SocketInfo\032\020.Iris.StatusCod"
-  "e2;\n\007NetPipe\0220\n\nPutMessage\022\020.Iris.DataBu"
-  "ffer\032\020.Iris.StatusCodeb\006proto3"
+  "ERROR\020\001\"-\n\nDataBuffer\022\014\n\004data\030\001 \001(\014\022\021\n\ts"
+  "ock_port\030\002 \001(\r\"1\n\021NetworkParameters\022\034\n\024f"
+  "rameLossProbability\030\001 \001(\002\"\037\n\nSocketInfo\022"
+  "\021\n\tsock_port\030\001 \001(\r2\325\002\n\013TestService\0220\n\nPu"
+  "tMessage\022\020.Iris.DataBuffer\032\020.Iris.Status"
+  "Code\0220\n\nGetMessage\022\020.Iris.SocketInfo\032\020.I"
+  "ris.DataBuffer\022A\n\024SetNetworkParameters\022\027"
+  ".Iris.NetworkParameters\032\020.Iris.StatusCod"
+  "e\0226\n\004Kill\022\026.google.protobuf.Empty\032\026.goog"
+  "le.protobuf.Empty\0222\n\014CreateSocket\022\020.Iris"
+  ".SocketInfo\032\020.Iris.StatusCode\0223\n\rDestroy"
+  "Socket\022\020.Iris.SocketInfo\032\020.Iris.StatusCo"
+  "de2;\n\007NetPipe\0220\n\nPutMessage\022\020.Iris.DataB"
+  "uffer\032\020.Iris.StatusCodeb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Iris_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Iris_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Iris_2eproto = {
-    false, false, 670, descriptor_table_protodef_Iris_2eproto,
+    false, false, 671, descriptor_table_protodef_Iris_2eproto,
     "Iris.proto",
     &descriptor_table_Iris_2eproto_once, descriptor_table_Iris_2eproto_deps, 1, 4,
     schemas, file_default_instances, TableStruct_Iris_2eproto::offsets,
@@ -382,7 +382,7 @@ DataBuffer::DataBuffer(const DataBuffer& from)
   DataBuffer* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.data_){}
-    , decltype(_impl_.dstport_){}
+    , decltype(_impl_.sock_port_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -394,7 +394,7 @@ DataBuffer::DataBuffer(const DataBuffer& from)
     _this->_impl_.data_.Set(from._internal_data(), 
       _this->GetArenaForAllocation());
   }
-  _this->_impl_.dstport_ = from._impl_.dstport_;
+  _this->_impl_.sock_port_ = from._impl_.sock_port_;
   // @@protoc_insertion_point(copy_constructor:Iris.DataBuffer)
 }
 
@@ -404,7 +404,7 @@ inline void DataBuffer::SharedCtor(
   (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_.data_){}
-    , decltype(_impl_.dstport_){0u}
+    , decltype(_impl_.sock_port_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.data_.InitDefault();
@@ -438,7 +438,7 @@ void DataBuffer::Clear() {
   (void) cached_has_bits;
 
   _impl_.data_.ClearToEmpty();
-  _impl_.dstport_ = 0u;
+  _impl_.sock_port_ = 0u;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -457,10 +457,10 @@ const char* DataBuffer::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
         } else
           goto handle_unusual;
         continue;
-      // uint32 dstPort = 2;
+      // uint32 sock_port = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.dstport_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.sock_port_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -500,10 +500,10 @@ uint8_t* DataBuffer::_InternalSerialize(
         1, this->_internal_data(), target);
   }
 
-  // uint32 dstPort = 2;
-  if (this->_internal_dstport() != 0) {
+  // uint32 sock_port = 2;
+  if (this->_internal_sock_port() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_dstport(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_sock_port(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -529,9 +529,9 @@ size_t DataBuffer::ByteSizeLong() const {
         this->_internal_data());
   }
 
-  // uint32 dstPort = 2;
-  if (this->_internal_dstport() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_dstport());
+  // uint32 sock_port = 2;
+  if (this->_internal_sock_port() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_sock_port());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -555,8 +555,8 @@ void DataBuffer::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
   if (!from._internal_data().empty()) {
     _this->_internal_set_data(from._internal_data());
   }
-  if (from._internal_dstport() != 0) {
-    _this->_internal_set_dstport(from._internal_dstport());
+  if (from._internal_sock_port() != 0) {
+    _this->_internal_set_sock_port(from._internal_sock_port());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -581,7 +581,7 @@ void DataBuffer::InternalSwap(DataBuffer* other) {
       &_impl_.data_, lhs_arena,
       &other->_impl_.data_, rhs_arena
   );
-  swap(_impl_.dstport_, other->_impl_.dstport_);
+  swap(_impl_.sock_port_, other->_impl_.sock_port_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata DataBuffer::GetMetadata() const {
@@ -796,11 +796,11 @@ SocketInfo::SocketInfo(const SocketInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   SocketInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.port_){}
+      decltype(_impl_.sock_port_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  _this->_impl_.port_ = from._impl_.port_;
+  _this->_impl_.sock_port_ = from._impl_.sock_port_;
   // @@protoc_insertion_point(copy_constructor:Iris.SocketInfo)
 }
 
@@ -809,7 +809,7 @@ inline void SocketInfo::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.port_){0u}
+      decltype(_impl_.sock_port_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -837,7 +837,7 @@ void SocketInfo::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.port_ = 0u;
+  _impl_.sock_port_ = 0u;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -847,10 +847,10 @@ const char* SocketInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // uint32 port = 1;
+      // uint32 sock_port = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _impl_.port_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          _impl_.sock_port_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -884,10 +884,10 @@ uint8_t* SocketInfo::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint32 port = 1;
-  if (this->_internal_port() != 0) {
+  // uint32 sock_port = 1;
+  if (this->_internal_sock_port() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_port(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_sock_port(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -906,9 +906,9 @@ size_t SocketInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // uint32 port = 1;
-  if (this->_internal_port() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_port());
+  // uint32 sock_port = 1;
+  if (this->_internal_sock_port() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_sock_port());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -929,8 +929,8 @@ void SocketInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_port() != 0) {
-    _this->_internal_set_port(from._internal_port());
+  if (from._internal_sock_port() != 0) {
+    _this->_internal_set_sock_port(from._internal_sock_port());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -949,7 +949,7 @@ bool SocketInfo::IsInitialized() const {
 void SocketInfo::InternalSwap(SocketInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_.port_, other->_impl_.port_);
+  swap(_impl_.sock_port_, other->_impl_.sock_port_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata SocketInfo::GetMetadata() const {
