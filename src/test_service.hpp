@@ -18,6 +18,9 @@ Includes
 #include <src/generated/Iris.pb.h>
 #include <src/generated/Iris.grpc.pb.h>
 #include <grpcpp/grpcpp.h>
+#include <atomic>
+#include <map>
+#include <Iris/session>
 
 namespace Iris::Dev
 {
@@ -30,6 +33,7 @@ namespace Iris::Dev
   Public Data
   ---------------------------------------------------------------------------*/
   extern std::unique_ptr<grpc::Server> RPCTestServer;
+  extern std::atomic<bool>             ApplicationKillSignal;
 
   /*---------------------------------------------------------------------------
   Public Functions
@@ -42,12 +46,34 @@ namespace Iris::Dev
   class TestServiceImpl final : public TestService::Service
   {
   public:
-    ::grpc::Status PutMessage(::grpc::ServerContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response) override;
-    ::grpc::Status GetMessage(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::Iris::DataBuffer* response) override;
-    ::grpc::Status SetNetworkParameters(::grpc::ServerContext* context, const ::Iris::NetworkParameters* request, ::Iris::StatusCode* response) override;
+    ::grpc::Status PutMessage( ::grpc::ServerContext *context, const ::Iris::DataBuffer *request,
+                               ::Iris::StatusCode *response ) override;
+    ::grpc::Status GetMessage( ::grpc::ServerContext *context, const ::google::protobuf::Empty *request,
+                               ::Iris::DataBuffer *response ) override;
+    ::grpc::Status SetNetworkParameters( ::grpc::ServerContext *context, const ::Iris::NetworkParameters *request,
+                                         ::Iris::StatusCode *response ) override;
+    ::grpc::Status Kill( ::grpc::ServerContext *context, const ::google::protobuf::Empty *request,
+                         ::google::protobuf::Empty *response ) override;
+    ::grpc::Status CreateSocket( ::grpc::ServerContext *context, const ::Iris::SocketInfo *request,
+                                 ::Iris::StatusCode *response ) override;
+    ::grpc::Status DestroySocket( ::grpc::ServerContext *context, const ::Iris::SocketInfo *request,
+                                  ::Iris::StatusCode *response ) override;
+
+    void initialize();
+
+  private:
+    struct SockResource
+    {
+      Iris::Session::Socket  *sock;
+      Transport::DfltTXQueue  s_tx_queue;
+      Transport::DfltRXQueue  s_rx_queue;
+      Physical::DfltFramePool s_frame_pool;
+    };
+
+    std::map<uint32_t, SockResource*> mSockets;
   };
 
 
-}  // namespace Iris::Dev
+}    // namespace Iris::Dev
 
-#endif  /* !IRIS_DEV_TEST_SERVICE_HPP */
+#endif /* !IRIS_DEV_TEST_SERVICE_HPP */

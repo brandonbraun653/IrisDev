@@ -2,5 +2,6 @@
   "files.associations": {
     "*.JLinkScript": "plaintext",
     "physical_types.hpp": "c"
-  }
+  },
+  "C_Cpp.intelliSenseEngineFallback": "enabled"
 }

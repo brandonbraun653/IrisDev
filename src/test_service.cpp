@@ -12,6 +12,7 @@
 Includes
 -----------------------------------------------------------------------------*/
 #include <src/test_service.hpp>
+#include <src/test_driver.hpp>
 
 using grpc::ServerBuilder;
 using grpc::ServerBuilder;
@@ -24,6 +25,7 @@ namespace Iris::Dev
   Public Data
   ---------------------------------------------------------------------------*/
   std::unique_ptr<grpc::Server> RPCTestServer;
+  std::atomic<bool>             ApplicationKillSignal;
 
   /*---------------------------------------------------------------------------
   Public Functions
@@ -57,4 +59,40 @@ namespace Iris::Dev
   {
     return ::grpc::Status::OK;
   }
+
+  ::grpc::Status TestServiceImpl::Kill(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response)
+  {
+    ApplicationKillSignal = true;
+    return ::grpc::Status::OK;
+  }
+
+
+  ::grpc::Status TestServiceImpl::CreateSocket(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response)
+  {
+    SockResource* sock_data = new SockResource();
+
+    Iris::Session::SockCfg cfg;
+    cfg.listenOn = request->port();
+    cfg.framePool = &sock_data->s_frame_pool;
+    cfg.rxQueue = &sock_data->s_rx_queue;
+    cfg.txQueue = &sock_data->s_tx_queue;
+
+    sock_data->sock = session.createSocket( cfg );
+    mSockets[ request->port() ] = sock_data;
+
+    return ::grpc::Status::OK;
+  }
+
+
+  ::grpc::Status TestServiceImpl::DestroySocket(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response)
+  {
+    return ::grpc::Status::OK;
+  }
+
+  void TestServiceImpl::initialize()
+  {
+    ApplicationKillSignal = false;
+    mSockets.clear();
+  }
+
 }  // namespace Iris::Dev

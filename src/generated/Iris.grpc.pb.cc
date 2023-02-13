@@ -25,6 +25,9 @@ static const char* TestService_method_names[] = {
   "/Iris.TestService/PutMessage",
   "/Iris.TestService/GetMessage",
   "/Iris.TestService/SetNetworkParameters",
+  "/Iris.TestService/Kill",
+  "/Iris.TestService/CreateSocket",
+  "/Iris.TestService/DestroySocket",
 };
 
 std::unique_ptr< TestService::Stub> TestService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -37,6 +40,9 @@ TestService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   : channel_(channel), rpcmethod_PutMessage_(TestService_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_GetMessage_(TestService_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_SetNetworkParameters_(TestService_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_Kill_(TestService_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CreateSocket_(TestService_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DestroySocket_(TestService_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status TestService::Stub::PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::Iris::StatusCode* response) {
@@ -108,6 +114,75 @@ void TestService::Stub::async::SetNetworkParameters(::grpc::ClientContext* conte
   return result;
 }
 
+::grpc::Status TestService::Stub::Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::google::protobuf::Empty* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::google::protobuf::Empty, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Kill_, context, request, response);
+}
+
+void TestService::Stub::async::Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::google::protobuf::Empty, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Kill_, context, request, response, std::move(f));
+}
+
+void TestService::Stub::async::Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Kill_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* TestService::Stub::PrepareAsyncKillRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::google::protobuf::Empty, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Kill_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* TestService::Stub::AsyncKillRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncKillRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status TestService::Stub::CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::Iris::StatusCode* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Iris::SocketInfo, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_CreateSocket_, context, request, response);
+}
+
+void TestService::Stub::async::CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Iris::SocketInfo, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CreateSocket_, context, request, response, std::move(f));
+}
+
+void TestService::Stub::async::CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CreateSocket_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* TestService::Stub::PrepareAsyncCreateSocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Iris::StatusCode, ::Iris::SocketInfo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_CreateSocket_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* TestService::Stub::AsyncCreateSocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncCreateSocketRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
+::grpc::Status TestService::Stub::DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::Iris::StatusCode* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::Iris::SocketInfo, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_DestroySocket_, context, request, response);
+}
+
+void TestService::Stub::async::DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::Iris::SocketInfo, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_DestroySocket_, context, request, response, std::move(f));
+}
+
+void TestService::Stub::async::DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_DestroySocket_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* TestService::Stub::PrepareAsyncDestroySocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Iris::StatusCode, ::Iris::SocketInfo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_DestroySocket_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* TestService::Stub::AsyncDestroySocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncDestroySocketRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 TestService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       TestService_method_names[0],
@@ -139,6 +214,36 @@ TestService::Service::Service() {
              ::Iris::StatusCode* resp) {
                return service->SetNetworkParameters(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      TestService_method_names[3],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< TestService::Service, ::google::protobuf::Empty, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](TestService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::google::protobuf::Empty* req,
+             ::google::protobuf::Empty* resp) {
+               return service->Kill(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      TestService_method_names[4],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< TestService::Service, ::Iris::SocketInfo, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](TestService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Iris::SocketInfo* req,
+             ::Iris::StatusCode* resp) {
+               return service->CreateSocket(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      TestService_method_names[5],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< TestService::Service, ::Iris::SocketInfo, ::Iris::StatusCode, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](TestService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::Iris::SocketInfo* req,
+             ::Iris::StatusCode* resp) {
+               return service->DestroySocket(ctx, req, resp);
+             }, this)));
 }
 
 TestService::Service::~Service() {
@@ -159,6 +264,27 @@ TestService::Service::~Service() {
 }
 
 ::grpc::Status TestService::Service::SetNetworkParameters(::grpc::ServerContext* context, const ::Iris::NetworkParameters* request, ::Iris::StatusCode* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status TestService::Service::Kill(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status TestService::Service::CreateSocket(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status TestService::Service::DestroySocket(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response) {
   (void) context;
   (void) request;
   (void) response;

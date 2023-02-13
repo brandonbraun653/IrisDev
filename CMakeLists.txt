@@ -13,3 +13,11 @@ find_package(Protobuf REQUIRED PATHS ${PROJECT_ROOT}/artifacts/lib/cmake/protobu
 find_package(gRPC REQUIRED PATHS ${PROJECT_ROOT}/artifacts/lib/cmake/grpc)
 
 add_subdirectory(src)
+add_subdirectory(Iris)
+
+
+# Update Iris include paths for dependencies
+target_include_directories(iris_prj_dependencies INTERFACE
+  ${PROJECT_ROOT}/lib/etl/include
+  ${PROJECT_ROOT}/prj
+)

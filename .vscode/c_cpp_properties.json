@@ -4,12 +4,15 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}",
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/src/generated",
                 "${workspaceFolder}/Iris/include",
                 "${workspaceFolder}/Iris/src",
                 "${workspaceFolder}/Iris/src/physical",
                 "${workspaceFolder}/artifacts/include",
                 "${workspaceFolder}/lib/argparse/include",
                 "${workspaceFolder}/lib/etl/include",
+                "${workspaceFolder}/lib/grpc/include",
                 "${workspaceFolder}/prj"
             ],
             "defines": [],

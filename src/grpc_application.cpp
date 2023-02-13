@@ -12,13 +12,10 @@
 Includes
 -----------------------------------------------------------------------------*/
 #include <argparse/argparse.hpp>
+#include <src/test_driver.hpp>
 #include <src/test_service.hpp>
 #include <src/net_pipe.hpp>
 #include <thread>
-
-/*-----------------------------------------------------------------------------
-Static Data
------------------------------------------------------------------------------*/
 
 
 /*-----------------------------------------------------------------------------
@@ -65,7 +62,8 @@ int main( int argc, char **argv )
   /*---------------------------------------------------------------------------
   Run the networking application
   ---------------------------------------------------------------------------*/
-  std::this_thread::sleep_for( std::chrono::seconds( 5 ) );
+  Iris::Dev::ApplicationKillSignal = false;
+  Iris::Dev::TestDriverThread();
 
   /*---------------------------------------------------------------------------
   Tear down the servers
@@ -75,5 +73,3 @@ int main( int argc, char **argv )
   Iris::Dev::RPCTestServer->Shutdown();
   rpc_thread.join();
 }
-
-

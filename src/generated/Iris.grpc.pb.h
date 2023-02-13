@@ -56,6 +56,27 @@ class TestService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>> PrepareAsyncSetNetworkParameters(::grpc::ClientContext* context, const ::Iris::NetworkParameters& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>>(PrepareAsyncSetNetworkParametersRaw(context, request, cq));
     }
+    virtual ::grpc::Status Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::google::protobuf::Empty* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> AsyncKill(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(AsyncKillRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>> PrepareAsyncKill(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>>(PrepareAsyncKillRaw(context, request, cq));
+    }
+    virtual ::grpc::Status CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::Iris::StatusCode* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>> AsyncCreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>>(AsyncCreateSocketRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>> PrepareAsyncCreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>>(PrepareAsyncCreateSocketRaw(context, request, cq));
+    }
+    virtual ::grpc::Status DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::Iris::StatusCode* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>> AsyncDestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>>(AsyncDestroySocketRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>> PrepareAsyncDestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>>(PrepareAsyncDestroySocketRaw(context, request, cq));
+    }
     class async_interface {
      public:
       virtual ~async_interface() {}
@@ -65,6 +86,12 @@ class TestService final {
       virtual void GetMessage(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::Iris::DataBuffer* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       virtual void SetNetworkParameters(::grpc::ClientContext* context, const ::Iris::NetworkParameters* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) = 0;
       virtual void SetNetworkParameters(::grpc::ClientContext* context, const ::Iris::NetworkParameters* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
@@ -76,6 +103,12 @@ class TestService final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::DataBuffer>* PrepareAsyncGetMessageRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* AsyncSetNetworkParametersRaw(::grpc::ClientContext* context, const ::Iris::NetworkParameters& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* PrepareAsyncSetNetworkParametersRaw(::grpc::ClientContext* context, const ::Iris::NetworkParameters& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* AsyncKillRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::google::protobuf::Empty>* PrepareAsyncKillRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* AsyncCreateSocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* PrepareAsyncCreateSocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* AsyncDestroySocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::Iris::StatusCode>* PrepareAsyncDestroySocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -101,6 +134,27 @@ class TestService final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>> PrepareAsyncSetNetworkParameters(::grpc::ClientContext* context, const ::Iris::NetworkParameters& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>>(PrepareAsyncSetNetworkParametersRaw(context, request, cq));
     }
+    ::grpc::Status Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::google::protobuf::Empty* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> AsyncKill(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(AsyncKillRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>> PrepareAsyncKill(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>>(PrepareAsyncKillRaw(context, request, cq));
+    }
+    ::grpc::Status CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::Iris::StatusCode* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>> AsyncCreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>>(AsyncCreateSocketRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>> PrepareAsyncCreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>>(PrepareAsyncCreateSocketRaw(context, request, cq));
+    }
+    ::grpc::Status DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::Iris::StatusCode* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>> AsyncDestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>>(AsyncDestroySocketRaw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>> PrepareAsyncDestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>>(PrepareAsyncDestroySocketRaw(context, request, cq));
+    }
     class async final :
       public StubInterface::async_interface {
      public:
@@ -110,6 +164,12 @@ class TestService final {
       void GetMessage(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::Iris::DataBuffer* response, ::grpc::ClientUnaryReactor* reactor) override;
       void SetNetworkParameters(::grpc::ClientContext* context, const ::Iris::NetworkParameters* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) override;
       void SetNetworkParameters(::grpc::ClientContext* context, const ::Iris::NetworkParameters* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response, std::function<void(::grpc::Status)>) override;
+      void Kill(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) override;
+      void CreateSocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, std::function<void(::grpc::Status)>) override;
+      void DestroySocket(::grpc::ClientContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -127,9 +187,18 @@ class TestService final {
     ::grpc::ClientAsyncResponseReader< ::Iris::DataBuffer>* PrepareAsyncGetMessageRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* AsyncSetNetworkParametersRaw(::grpc::ClientContext* context, const ::Iris::NetworkParameters& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* PrepareAsyncSetNetworkParametersRaw(::grpc::ClientContext* context, const ::Iris::NetworkParameters& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* AsyncKillRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::google::protobuf::Empty>* PrepareAsyncKillRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* AsyncCreateSocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* PrepareAsyncCreateSocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* AsyncDestroySocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::Iris::StatusCode>* PrepareAsyncDestroySocketRaw(::grpc::ClientContext* context, const ::Iris::SocketInfo& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_PutMessage_;
     const ::grpc::internal::RpcMethod rpcmethod_GetMessage_;
     const ::grpc::internal::RpcMethod rpcmethod_SetNetworkParameters_;
+    const ::grpc::internal::RpcMethod rpcmethod_Kill_;
+    const ::grpc::internal::RpcMethod rpcmethod_CreateSocket_;
+    const ::grpc::internal::RpcMethod rpcmethod_DestroySocket_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -140,6 +209,9 @@ class TestService final {
     virtual ::grpc::Status PutMessage(::grpc::ServerContext* context, const ::Iris::DataBuffer* request, ::Iris::StatusCode* response);
     virtual ::grpc::Status GetMessage(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::Iris::DataBuffer* response);
     virtual ::grpc::Status SetNetworkParameters(::grpc::ServerContext* context, const ::Iris::NetworkParameters* request, ::Iris::StatusCode* response);
+    virtual ::grpc::Status Kill(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response);
+    virtual ::grpc::Status CreateSocket(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response);
+    virtual ::grpc::Status DestroySocket(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_PutMessage : public BaseClass {
@@ -201,7 +273,67 @@ class TestService final {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_PutMessage<WithAsyncMethod_GetMessage<WithAsyncMethod_SetNetworkParameters<Service > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_Kill : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_Kill() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_Kill() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Kill(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::google::protobuf::Empty* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestKill(::grpc::ServerContext* context, ::google::protobuf::Empty* request, ::grpc::ServerAsyncResponseWriter< ::google::protobuf::Empty>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_CreateSocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_CreateSocket() {
+      ::grpc::Service::MarkMethodAsync(4);
+    }
+    ~WithAsyncMethod_CreateSocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateSocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCreateSocket(::grpc::ServerContext* context, ::Iris::SocketInfo* request, ::grpc::ServerAsyncResponseWriter< ::Iris::StatusCode>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_DestroySocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_DestroySocket() {
+      ::grpc::Service::MarkMethodAsync(5);
+    }
+    ~WithAsyncMethod_DestroySocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DestroySocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDestroySocket(::grpc::ServerContext* context, ::Iris::SocketInfo* request, ::grpc::ServerAsyncResponseWriter< ::Iris::StatusCode>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_PutMessage<WithAsyncMethod_GetMessage<WithAsyncMethod_SetNetworkParameters<WithAsyncMethod_Kill<WithAsyncMethod_CreateSocket<WithAsyncMethod_DestroySocket<Service > > > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_PutMessage : public BaseClass {
    private:
@@ -283,7 +415,88 @@ class TestService final {
     virtual ::grpc::ServerUnaryReactor* SetNetworkParameters(
       ::grpc::CallbackServerContext* /*context*/, const ::Iris::NetworkParameters* /*request*/, ::Iris::StatusCode* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_PutMessage<WithCallbackMethod_GetMessage<WithCallbackMethod_SetNetworkParameters<Service > > > CallbackService;
+  template <class BaseClass>
+  class WithCallbackMethod_Kill : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_Kill() {
+      ::grpc::Service::MarkMethodCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::google::protobuf::Empty>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::google::protobuf::Empty* request, ::google::protobuf::Empty* response) { return this->Kill(context, request, response); }));}
+    void SetMessageAllocatorFor_Kill(
+        ::grpc::MessageAllocator< ::google::protobuf::Empty, ::google::protobuf::Empty>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::google::protobuf::Empty, ::google::protobuf::Empty>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_Kill() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Kill(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::google::protobuf::Empty* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* Kill(
+      ::grpc::CallbackServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::google::protobuf::Empty* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_CreateSocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_CreateSocket() {
+      ::grpc::Service::MarkMethodCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::Iris::SocketInfo, ::Iris::StatusCode>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response) { return this->CreateSocket(context, request, response); }));}
+    void SetMessageAllocatorFor_CreateSocket(
+        ::grpc::MessageAllocator< ::Iris::SocketInfo, ::Iris::StatusCode>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::Iris::SocketInfo, ::Iris::StatusCode>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_CreateSocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateSocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* CreateSocket(
+      ::grpc::CallbackServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_DestroySocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_DestroySocket() {
+      ::grpc::Service::MarkMethodCallback(5,
+          new ::grpc::internal::CallbackUnaryHandler< ::Iris::SocketInfo, ::Iris::StatusCode>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response) { return this->DestroySocket(context, request, response); }));}
+    void SetMessageAllocatorFor_DestroySocket(
+        ::grpc::MessageAllocator< ::Iris::SocketInfo, ::Iris::StatusCode>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(5);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::Iris::SocketInfo, ::Iris::StatusCode>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_DestroySocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DestroySocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* DestroySocket(
+      ::grpc::CallbackServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/)  { return nullptr; }
+  };
+  typedef WithCallbackMethod_PutMessage<WithCallbackMethod_GetMessage<WithCallbackMethod_SetNetworkParameters<WithCallbackMethod_Kill<WithCallbackMethod_CreateSocket<WithCallbackMethod_DestroySocket<Service > > > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
   template <class BaseClass>
   class WithGenericMethod_PutMessage : public BaseClass {
@@ -332,6 +545,57 @@ class TestService final {
     }
     // disable synchronous version of this method
     ::grpc::Status SetNetworkParameters(::grpc::ServerContext* /*context*/, const ::Iris::NetworkParameters* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_Kill : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_Kill() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_Kill() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Kill(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::google::protobuf::Empty* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_CreateSocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_CreateSocket() {
+      ::grpc::Service::MarkMethodGeneric(4);
+    }
+    ~WithGenericMethod_CreateSocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateSocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_DestroySocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_DestroySocket() {
+      ::grpc::Service::MarkMethodGeneric(5);
+    }
+    ~WithGenericMethod_DestroySocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DestroySocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -394,6 +658,66 @@ class TestService final {
     }
     void RequestSetNetworkParameters(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_Kill : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_Kill() {
+      ::grpc::Service::MarkMethodRaw(3);
+    }
+    ~WithRawMethod_Kill() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Kill(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::google::protobuf::Empty* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestKill(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_CreateSocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_CreateSocket() {
+      ::grpc::Service::MarkMethodRaw(4);
+    }
+    ~WithRawMethod_CreateSocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateSocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCreateSocket(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_DestroySocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_DestroySocket() {
+      ::grpc::Service::MarkMethodRaw(5);
+    }
+    ~WithRawMethod_DestroySocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DestroySocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestDestroySocket(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -460,6 +784,72 @@ class TestService final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* SetNetworkParameters(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_Kill : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_Kill() {
+      ::grpc::Service::MarkMethodRawCallback(3,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->Kill(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_Kill() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status Kill(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::google::protobuf::Empty* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* Kill(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_CreateSocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_CreateSocket() {
+      ::grpc::Service::MarkMethodRawCallback(4,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CreateSocket(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_CreateSocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CreateSocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* CreateSocket(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_DestroySocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_DestroySocket() {
+      ::grpc::Service::MarkMethodRawCallback(5,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->DestroySocket(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_DestroySocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status DestroySocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* DestroySocket(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
@@ -543,9 +933,90 @@ class TestService final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedSetNetworkParameters(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Iris::NetworkParameters,::Iris::StatusCode>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_PutMessage<WithStreamedUnaryMethod_GetMessage<WithStreamedUnaryMethod_SetNetworkParameters<Service > > > StreamedUnaryService;
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_Kill : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_Kill() {
+      ::grpc::Service::MarkMethodStreamed(3,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::google::protobuf::Empty, ::google::protobuf::Empty>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::google::protobuf::Empty, ::google::protobuf::Empty>* streamer) {
+                       return this->StreamedKill(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_Kill() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status Kill(::grpc::ServerContext* /*context*/, const ::google::protobuf::Empty* /*request*/, ::google::protobuf::Empty* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedKill(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::google::protobuf::Empty,::google::protobuf::Empty>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_CreateSocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_CreateSocket() {
+      ::grpc::Service::MarkMethodStreamed(4,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::Iris::SocketInfo, ::Iris::StatusCode>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::Iris::SocketInfo, ::Iris::StatusCode>* streamer) {
+                       return this->StreamedCreateSocket(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_CreateSocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status CreateSocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedCreateSocket(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Iris::SocketInfo,::Iris::StatusCode>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_DestroySocket : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_DestroySocket() {
+      ::grpc::Service::MarkMethodStreamed(5,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::Iris::SocketInfo, ::Iris::StatusCode>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::Iris::SocketInfo, ::Iris::StatusCode>* streamer) {
+                       return this->StreamedDestroySocket(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_DestroySocket() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status DestroySocket(::grpc::ServerContext* /*context*/, const ::Iris::SocketInfo* /*request*/, ::Iris::StatusCode* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedDestroySocket(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::Iris::SocketInfo,::Iris::StatusCode>* server_unary_streamer) = 0;
+  };
+  typedef WithStreamedUnaryMethod_PutMessage<WithStreamedUnaryMethod_GetMessage<WithStreamedUnaryMethod_SetNetworkParameters<WithStreamedUnaryMethod_Kill<WithStreamedUnaryMethod_CreateSocket<WithStreamedUnaryMethod_DestroySocket<Service > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_PutMessage<WithStreamedUnaryMethod_GetMessage<WithStreamedUnaryMethod_SetNetworkParameters<Service > > > StreamedService;
+  typedef WithStreamedUnaryMethod_PutMessage<WithStreamedUnaryMethod_GetMessage<WithStreamedUnaryMethod_SetNetworkParameters<WithStreamedUnaryMethod_Kill<WithStreamedUnaryMethod_CreateSocket<WithStreamedUnaryMethod_DestroySocket<Service > > > > > > StreamedService;
 };
 
 class NetPipe final {

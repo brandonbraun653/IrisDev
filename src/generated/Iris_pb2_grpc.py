@@ -30,6 +30,21 @@ class TestServiceStub(object):
                 request_serializer=Iris__pb2.NetworkParameters.SerializeToString,
                 response_deserializer=Iris__pb2.StatusCode.FromString,
                 )
+        self.Kill = channel.unary_unary(
+                '/Iris.TestService/Kill',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.CreateSocket = channel.unary_unary(
+                '/Iris.TestService/CreateSocket',
+                request_serializer=Iris__pb2.SocketInfo.SerializeToString,
+                response_deserializer=Iris__pb2.StatusCode.FromString,
+                )
+        self.DestroySocket = channel.unary_unary(
+                '/Iris.TestService/DestroySocket',
+                request_serializer=Iris__pb2.SocketInfo.SerializeToString,
+                response_deserializer=Iris__pb2.StatusCode.FromString,
+                )
 
 
 class TestServiceServicer(object):
@@ -53,6 +68,24 @@ class TestServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Kill(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateSocket(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DestroySocket(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_TestServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -69,6 +102,21 @@ def add_TestServiceServicer_to_server(servicer, server):
             'SetNetworkParameters': grpc.unary_unary_rpc_method_handler(
                     servicer.SetNetworkParameters,
                     request_deserializer=Iris__pb2.NetworkParameters.FromString,
+                    response_serializer=Iris__pb2.StatusCode.SerializeToString,
+            ),
+            'Kill': grpc.unary_unary_rpc_method_handler(
+                    servicer.Kill,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'CreateSocket': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateSocket,
+                    request_deserializer=Iris__pb2.SocketInfo.FromString,
+                    response_serializer=Iris__pb2.StatusCode.SerializeToString,
+            ),
+            'DestroySocket': grpc.unary_unary_rpc_method_handler(
+                    servicer.DestroySocket,
+                    request_deserializer=Iris__pb2.SocketInfo.FromString,
                     response_serializer=Iris__pb2.StatusCode.SerializeToString,
             ),
     }
@@ -128,6 +176,57 @@ class TestService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Iris.TestService/SetNetworkParameters',
             Iris__pb2.NetworkParameters.SerializeToString,
+            Iris__pb2.StatusCode.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Kill(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Iris.TestService/Kill',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateSocket(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Iris.TestService/CreateSocket',
+            Iris__pb2.SocketInfo.SerializeToString,
+            Iris__pb2.StatusCode.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DestroySocket(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Iris.TestService/DestroySocket',
+            Iris__pb2.SocketInfo.SerializeToString,
             Iris__pb2.StatusCode.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

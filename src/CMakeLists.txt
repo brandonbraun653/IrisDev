@@ -1,9 +1,10 @@
 add_executable(IrisTestClient
-  grpc_application.cpp
-  net_pipe.cpp
-  test_service.cpp
   generated/Iris.grpc.pb.cc
   generated/Iris.pb.cc
+  grpc_application.cpp
+  net_pipe.cpp
+  test_driver.cpp
+  test_service.cpp
   )
 
 target_include_directories(IrisTestClient PRIVATE
@@ -26,6 +27,8 @@ target_link_libraries(IrisTestClient PRIVATE
   protobuf::libprotobuf-lite
   protobuf
   pthread
+  iris_intf_inc
+  iris_lib
 )
 
 add_custom_command(TARGET IrisTestClient POST_BUILD

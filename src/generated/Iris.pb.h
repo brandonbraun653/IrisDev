@@ -53,6 +53,9 @@ extern DataBufferDefaultTypeInternal _DataBuffer_default_instance_;
 class NetworkParameters;
 struct NetworkParametersDefaultTypeInternal;
 extern NetworkParametersDefaultTypeInternal _NetworkParameters_default_instance_;
+class SocketInfo;
+struct SocketInfoDefaultTypeInternal;
+extern SocketInfoDefaultTypeInternal _SocketInfo_default_instance_;
 class StatusCode;
 struct StatusCodeDefaultTypeInternal;
 extern StatusCodeDefaultTypeInternal _StatusCode_default_instance_;
@@ -60,6 +63,7 @@ extern StatusCodeDefaultTypeInternal _StatusCode_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Iris::DataBuffer* Arena::CreateMaybeMessage<::Iris::DataBuffer>(Arena*);
 template<> ::Iris::NetworkParameters* Arena::CreateMaybeMessage<::Iris::NetworkParameters>(Arena*);
+template<> ::Iris::SocketInfo* Arena::CreateMaybeMessage<::Iris::SocketInfo>(Arena*);
 template<> ::Iris::StatusCode* Arena::CreateMaybeMessage<::Iris::StatusCode>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Iris {
@@ -391,6 +395,7 @@ class DataBuffer final :
 
   enum : int {
     kDataFieldNumber = 1,
+    kDstPortFieldNumber = 2,
   };
   // bytes data = 1;
   void clear_data();
@@ -406,6 +411,15 @@ class DataBuffer final :
   std::string* _internal_mutable_data();
   public:
 
+  // uint32 dstPort = 2;
+  void clear_dstport();
+  uint32_t dstport() const;
+  void set_dstport(uint32_t value);
+  private:
+  uint32_t _internal_dstport() const;
+  void _internal_set_dstport(uint32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Iris.DataBuffer)
  private:
   class _Internal;
@@ -415,6 +429,7 @@ class DataBuffer final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_;
+    uint32_t dstport_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -568,6 +583,154 @@ class NetworkParameters final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_Iris_2eproto;
 };
+// -------------------------------------------------------------------
+
+class SocketInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Iris.SocketInfo) */ {
+ public:
+  inline SocketInfo() : SocketInfo(nullptr) {}
+  ~SocketInfo() override;
+  explicit PROTOBUF_CONSTEXPR SocketInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  SocketInfo(const SocketInfo& from);
+  SocketInfo(SocketInfo&& from) noexcept
+    : SocketInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline SocketInfo& operator=(const SocketInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline SocketInfo& operator=(SocketInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const SocketInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const SocketInfo* internal_default_instance() {
+    return reinterpret_cast<const SocketInfo*>(
+               &_SocketInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(SocketInfo& a, SocketInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(SocketInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(SocketInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  SocketInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<SocketInfo>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const SocketInfo& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const SocketInfo& from) {
+    SocketInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(SocketInfo* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Iris.SocketInfo";
+  }
+  protected:
+  explicit SocketInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPortFieldNumber = 1,
+  };
+  // uint32 port = 1;
+  void clear_port();
+  uint32_t port() const;
+  void set_port(uint32_t value);
+  private:
+  uint32_t _internal_port() const;
+  void _internal_set_port(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Iris.SocketInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    uint32_t port_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Iris_2eproto;
+};
 // ===================================================================
 
 
@@ -653,6 +816,26 @@ inline void DataBuffer::set_allocated_data(std::string* data) {
   // @@protoc_insertion_point(field_set_allocated:Iris.DataBuffer.data)
 }
 
+// uint32 dstPort = 2;
+inline void DataBuffer::clear_dstport() {
+  _impl_.dstport_ = 0u;
+}
+inline uint32_t DataBuffer::_internal_dstport() const {
+  return _impl_.dstport_;
+}
+inline uint32_t DataBuffer::dstport() const {
+  // @@protoc_insertion_point(field_get:Iris.DataBuffer.dstPort)
+  return _internal_dstport();
+}
+inline void DataBuffer::_internal_set_dstport(uint32_t value) {
+  
+  _impl_.dstport_ = value;
+}
+inline void DataBuffer::set_dstport(uint32_t value) {
+  _internal_set_dstport(value);
+  // @@protoc_insertion_point(field_set:Iris.DataBuffer.dstPort)
+}
+
 // -------------------------------------------------------------------
 
 // NetworkParameters
@@ -677,9 +860,35 @@ inline void NetworkParameters::set_framelossprobability(float value) {
   // @@protoc_insertion_point(field_set:Iris.NetworkParameters.frameLossProbability)
 }
 
+// -------------------------------------------------------------------
+
+// SocketInfo
+
+// uint32 port = 1;
+inline void SocketInfo::clear_port() {
+  _impl_.port_ = 0u;
+}
+inline uint32_t SocketInfo::_internal_port() const {
+  return _impl_.port_;
+}
+inline uint32_t SocketInfo::port() const {
+  // @@protoc_insertion_point(field_get:Iris.SocketInfo.port)
+  return _internal_port();
+}
+inline void SocketInfo::_internal_set_port(uint32_t value) {
+  
+  _impl_.port_ = value;
+}
+inline void SocketInfo::set_port(uint32_t value) {
+  _internal_set_port(value);
+  // @@protoc_insertion_point(field_set:Iris.SocketInfo.port)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
