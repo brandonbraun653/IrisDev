@@ -94,7 +94,8 @@
 		"cSpell.words": [
 			"argparse",
 			"netif",
-			"OSAL"
+			"OSAL",
+			"Smphr"
 		],
 		"workbench.colorCustomizations": {
 			"activityBar.activeBackground": "#d04649",

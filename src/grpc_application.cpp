@@ -14,7 +14,7 @@ Includes
 #include <argparse/argparse.hpp>
 #include <src/test_driver.hpp>
 #include <src/test_service.hpp>
-#include <src/net_pipe.hpp>
+#include <src/integration/netif.hpp>
 #include <thread>
 
 
@@ -57,7 +57,7 @@ int main( int argc, char **argv )
   std::thread rpc_thread( Iris::Dev::TestServiceThread, rpc_address );
 
   std::string net_address = "0.0.0.0:" + std::to_string( net_port );
-  std::thread net_thread( Iris::Dev::NetPipeThread, net_address );
+  Iris::Dev::getNetIf().spawnServer( net_address );
 
   /*---------------------------------------------------------------------------
   Run the networking application
@@ -67,8 +67,9 @@ int main( int argc, char **argv )
   /*---------------------------------------------------------------------------
   Tear down the servers
   ---------------------------------------------------------------------------*/
-  Iris::Dev::RPCNetPipeServer->Shutdown();
-  net_thread.join();
+  Iris::Dev::getNetIf().killServer();
   Iris::Dev::RPCTestServer->Shutdown();
   rpc_thread.join();
+
+  return 0;
 }

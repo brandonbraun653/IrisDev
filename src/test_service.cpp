@@ -118,6 +118,7 @@ namespace Iris::Dev
   ::grpc::Status TestServiceImpl::SetNetworkParameters( ::grpc::ServerContext           *context,
                                                         const ::Iris::NetworkParameters *request, ::Iris::StatusCode *response )
   {
+    getNetIf().updateNetworkParameters( *request );
     return ::grpc::Status::OK;
   }
 
@@ -154,7 +155,7 @@ namespace Iris::Dev
     cfg.rxQueue   = &sock_data->rx_queue;
     cfg.txQueue   = &sock_data->tx_queue;
 
-    sock_data->sock = session.createSocket( cfg );
+    sock_data->sock = getSession().createSocket( cfg );
 
     if ( sock_data->sock == nullptr )
     {
@@ -177,7 +178,7 @@ namespace Iris::Dev
     auto iter = mSockets.find( request->sock_port() );
     if ( iter != mSockets.end() )
     {
-      session.destroySocket( iter->second->sock );
+      getSession().destroySocket( iter->second->sock );
       mSockets.erase( iter );
       return ::grpc::Status::OK;
     }

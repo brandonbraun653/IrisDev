@@ -2,7 +2,8 @@ add_executable(IrisTestClient
   generated/Iris.grpc.pb.cc
   generated/Iris.pb.cc
   grpc_application.cpp
-  net_pipe.cpp
+  integration/netif.cpp
+  integration/osal.cpp
   test_driver.cpp
   test_service.cpp
   )
