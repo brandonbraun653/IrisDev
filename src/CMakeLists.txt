@@ -3,9 +3,9 @@ add_executable(IrisTestClient
   generated/Iris.pb.cc
   grpc_application.cpp
   integration/netif.cpp
-  integration/osal.cpp
   test_driver.cpp
   test_service.cpp
+  ../Iris/src/util/osal_stl.cpp
   )
 
 target_include_directories(IrisTestClient PRIVATE

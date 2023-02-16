@@ -155,7 +155,8 @@ namespace Iris::Dev
     cfg.rxQueue   = &sock_data->rx_queue;
     cfg.txQueue   = &sock_data->tx_queue;
 
-    sock_data->sock = getSession().createSocket( cfg );
+    getSession().createSocket( cfg );
+    sock_data->sock = getSession().getSocket( request->sock_port() );
 
     if ( sock_data->sock == nullptr )
     {
