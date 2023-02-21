@@ -1,3 +1,5 @@
 artifacts/
 build/
 .idea/
+.conda/
+__pycache__
