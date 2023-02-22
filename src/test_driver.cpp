@@ -49,10 +49,10 @@ namespace Iris::Dev
       s_session.process();
       count++;
 
-      if( count > 1000 )
-      {
-        ApplicationKillSignal = true;
-      }
+      // if( count > 1000 )
+      // {
+      //   ApplicationKillSignal = true;
+      // }
     }
 
     s_session.close();

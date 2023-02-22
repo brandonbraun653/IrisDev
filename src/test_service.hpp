@@ -58,6 +58,8 @@ namespace Iris::Dev
                                  ::Iris::StatusCode *response ) override;
     ::grpc::Status DestroySocket( ::grpc::ServerContext *context, const ::Iris::SocketInfo *request,
                                   ::Iris::StatusCode *response ) override;
+    ::grpc::Status GetVersion( ::grpc::ServerContext *context, const ::google::protobuf::Empty *request,
+                               ::Iris::VersionInfo *response ) override;
 
     void initialize();
 

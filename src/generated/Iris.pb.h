@@ -59,12 +59,16 @@ extern SocketInfoDefaultTypeInternal _SocketInfo_default_instance_;
 class StatusCode;
 struct StatusCodeDefaultTypeInternal;
 extern StatusCodeDefaultTypeInternal _StatusCode_default_instance_;
+class VersionInfo;
+struct VersionInfoDefaultTypeInternal;
+extern VersionInfoDefaultTypeInternal _VersionInfo_default_instance_;
 }  // namespace Iris
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Iris::DataBuffer* Arena::CreateMaybeMessage<::Iris::DataBuffer>(Arena*);
 template<> ::Iris::NetworkParameters* Arena::CreateMaybeMessage<::Iris::NetworkParameters>(Arena*);
 template<> ::Iris::SocketInfo* Arena::CreateMaybeMessage<::Iris::SocketInfo>(Arena*);
 template<> ::Iris::StatusCode* Arena::CreateMaybeMessage<::Iris::StatusCode>(Arena*);
+template<> ::Iris::VersionInfo* Arena::CreateMaybeMessage<::Iris::VersionInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Iris {
 
@@ -731,6 +735,159 @@ class SocketInfo final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_Iris_2eproto;
 };
+// -------------------------------------------------------------------
+
+class VersionInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Iris.VersionInfo) */ {
+ public:
+  inline VersionInfo() : VersionInfo(nullptr) {}
+  ~VersionInfo() override;
+  explicit PROTOBUF_CONSTEXPR VersionInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  VersionInfo(const VersionInfo& from);
+  VersionInfo(VersionInfo&& from) noexcept
+    : VersionInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline VersionInfo& operator=(const VersionInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline VersionInfo& operator=(VersionInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const VersionInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const VersionInfo* internal_default_instance() {
+    return reinterpret_cast<const VersionInfo*>(
+               &_VersionInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(VersionInfo& a, VersionInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(VersionInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(VersionInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  VersionInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<VersionInfo>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const VersionInfo& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const VersionInfo& from) {
+    VersionInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(VersionInfo* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Iris.VersionInfo";
+  }
+  protected:
+  explicit VersionInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kVersionFieldNumber = 1,
+  };
+  // string version = 1;
+  void clear_version();
+  const std::string& version() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_version(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_version();
+  PROTOBUF_NODISCARD std::string* release_version();
+  void set_allocated_version(std::string* version);
+  private:
+  const std::string& _internal_version() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_version(const std::string& value);
+  std::string* _internal_mutable_version();
+  public:
+
+  // @@protoc_insertion_point(class_scope:Iris.VersionInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr version_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Iris_2eproto;
+};
 // ===================================================================
 
 
@@ -884,9 +1041,65 @@ inline void SocketInfo::set_sock_port(uint32_t value) {
   // @@protoc_insertion_point(field_set:Iris.SocketInfo.sock_port)
 }
 
+// -------------------------------------------------------------------
+
+// VersionInfo
+
+// string version = 1;
+inline void VersionInfo::clear_version() {
+  _impl_.version_.ClearToEmpty();
+}
+inline const std::string& VersionInfo::version() const {
+  // @@protoc_insertion_point(field_get:Iris.VersionInfo.version)
+  return _internal_version();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void VersionInfo::set_version(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.version_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Iris.VersionInfo.version)
+}
+inline std::string* VersionInfo::mutable_version() {
+  std::string* _s = _internal_mutable_version();
+  // @@protoc_insertion_point(field_mutable:Iris.VersionInfo.version)
+  return _s;
+}
+inline const std::string& VersionInfo::_internal_version() const {
+  return _impl_.version_.Get();
+}
+inline void VersionInfo::_internal_set_version(const std::string& value) {
+  
+  _impl_.version_.Set(value, GetArenaForAllocation());
+}
+inline std::string* VersionInfo::_internal_mutable_version() {
+  
+  return _impl_.version_.Mutable(GetArenaForAllocation());
+}
+inline std::string* VersionInfo::release_version() {
+  // @@protoc_insertion_point(field_release:Iris.VersionInfo.version)
+  return _impl_.version_.Release();
+}
+inline void VersionInfo::set_allocated_version(std::string* version) {
+  if (version != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.version_.SetAllocated(version, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.version_.IsDefault()) {
+    _impl_.version_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Iris.VersionInfo.version)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

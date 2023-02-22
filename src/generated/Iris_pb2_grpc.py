@@ -45,6 +45,11 @@ class TestServiceStub(object):
                 request_serializer=Iris__pb2.SocketInfo.SerializeToString,
                 response_deserializer=Iris__pb2.StatusCode.FromString,
                 )
+        self.GetVersion = channel.unary_unary(
+                '/Iris.TestService/GetVersion',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=Iris__pb2.VersionInfo.FromString,
+                )
 
 
 class TestServiceServicer(object):
@@ -86,6 +91,12 @@ class TestServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetVersion(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_TestServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -118,6 +129,11 @@ def add_TestServiceServicer_to_server(servicer, server):
                     servicer.DestroySocket,
                     request_deserializer=Iris__pb2.SocketInfo.FromString,
                     response_serializer=Iris__pb2.StatusCode.SerializeToString,
+            ),
+            'GetVersion': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetVersion,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=Iris__pb2.VersionInfo.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -228,6 +244,23 @@ class TestService(object):
         return grpc.experimental.unary_unary(request, target, '/Iris.TestService/DestroySocket',
             Iris__pb2.SocketInfo.SerializeToString,
             Iris__pb2.StatusCode.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetVersion(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Iris.TestService/GetVersion',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            Iris__pb2.VersionInfo.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

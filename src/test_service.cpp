@@ -13,6 +13,7 @@ Includes
 -----------------------------------------------------------------------------*/
 #include <src/test_service.hpp>
 #include <src/test_driver.hpp>
+#include <Iris/Iris>
 
 using grpc::ServerBuilder;
 using grpc::ServerContext;
@@ -187,6 +188,14 @@ namespace Iris::Dev
     {
       return ::grpc::Status::CANCELLED;
     }
+  }
+
+
+  ::grpc::Status TestServiceImpl::GetVersion( ::grpc::ServerContext *context, const ::google::protobuf::Empty *request,
+                                              ::Iris::VersionInfo *response )
+  {
+    response->set_version( Iris::VERSION.data() );
+    return ::grpc::Status::OK;
   }
 
 

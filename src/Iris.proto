@@ -24,6 +24,10 @@ message SocketInfo {
   uint32 sock_port = 1;
 }
 
+message VersionInfo {
+  string version = 1;
+}
+
 service TestService {
     rpc PutMessage(DataBuffer) returns (StatusCode);
     rpc GetMessage(SocketInfo) returns (DataBuffer);
@@ -31,6 +35,7 @@ service TestService {
     rpc Kill(google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc CreateSocket(SocketInfo) returns (StatusCode);
     rpc DestroySocket(SocketInfo) returns (StatusCode);
+    rpc GetVersion(google.protobuf.Empty) returns (VersionInfo);
 }
 
 

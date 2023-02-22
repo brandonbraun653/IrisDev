@@ -28,6 +28,7 @@ static const char* TestService_method_names[] = {
   "/Iris.TestService/Kill",
   "/Iris.TestService/CreateSocket",
   "/Iris.TestService/DestroySocket",
+  "/Iris.TestService/GetVersion",
 };
 
 std::unique_ptr< TestService::Stub> TestService::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -43,6 +44,7 @@ TestService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channe
   , rpcmethod_Kill_(TestService_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_CreateSocket_(TestService_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_DestroySocket_(TestService_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_GetVersion_(TestService_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
 ::grpc::Status TestService::Stub::PutMessage(::grpc::ClientContext* context, const ::Iris::DataBuffer& request, ::Iris::StatusCode* response) {
@@ -183,6 +185,29 @@ void TestService::Stub::async::DestroySocket(::grpc::ClientContext* context, con
   return result;
 }
 
+::grpc::Status TestService::Stub::GetVersion(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::Iris::VersionInfo* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::google::protobuf::Empty, ::Iris::VersionInfo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_GetVersion_, context, request, response);
+}
+
+void TestService::Stub::async::GetVersion(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::Iris::VersionInfo* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::google::protobuf::Empty, ::Iris::VersionInfo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetVersion_, context, request, response, std::move(f));
+}
+
+void TestService::Stub::async::GetVersion(::grpc::ClientContext* context, const ::google::protobuf::Empty* request, ::Iris::VersionInfo* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_GetVersion_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::VersionInfo>* TestService::Stub::PrepareAsyncGetVersionRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::Iris::VersionInfo, ::google::protobuf::Empty, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_GetVersion_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::Iris::VersionInfo>* TestService::Stub::AsyncGetVersionRaw(::grpc::ClientContext* context, const ::google::protobuf::Empty& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncGetVersionRaw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 TestService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       TestService_method_names[0],
@@ -244,6 +269,16 @@ TestService::Service::Service() {
              ::Iris::StatusCode* resp) {
                return service->DestroySocket(ctx, req, resp);
              }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      TestService_method_names[6],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< TestService::Service, ::google::protobuf::Empty, ::Iris::VersionInfo, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](TestService::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::google::protobuf::Empty* req,
+             ::Iris::VersionInfo* resp) {
+               return service->GetVersion(ctx, req, resp);
+             }, this)));
 }
 
 TestService::Service::~Service() {
@@ -285,6 +320,13 @@ TestService::Service::~Service() {
 }
 
 ::grpc::Status TestService::Service::DestroySocket(::grpc::ServerContext* context, const ::Iris::SocketInfo* request, ::Iris::StatusCode* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status TestService::Service::GetVersion(::grpc::ServerContext* context, const ::google::protobuf::Empty* request, ::Iris::VersionInfo* response) {
   (void) context;
   (void) request;
   (void) response;

@@ -74,8 +74,21 @@ struct SocketInfoDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SocketInfoDefaultTypeInternal _SocketInfo_default_instance_;
+PROTOBUF_CONSTEXPR VersionInfo::VersionInfo(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.version_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct VersionInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR VersionInfoDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~VersionInfoDefaultTypeInternal() {}
+  union {
+    VersionInfo _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 VersionInfoDefaultTypeInternal _VersionInfo_default_instance_;
 }  // namespace Iris
-static ::_pb::Metadata file_level_metadata_Iris_2eproto[4];
+static ::_pb::Metadata file_level_metadata_Iris_2eproto[5];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Iris_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Iris_2eproto = nullptr;
 
@@ -109,12 +122,20 @@ const uint32_t TableStruct_Iris_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Iris::SocketInfo, _impl_.sock_port_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Iris::VersionInfo, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Iris::VersionInfo, _impl_.version_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Iris::StatusCode)},
   { 7, -1, -1, sizeof(::Iris::DataBuffer)},
   { 15, -1, -1, sizeof(::Iris::NetworkParameters)},
   { 22, -1, -1, sizeof(::Iris::SocketInfo)},
+  { 29, -1, -1, sizeof(::Iris::VersionInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -122,6 +143,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Iris::_DataBuffer_default_instance_._instance,
   &::Iris::_NetworkParameters_default_instance_._instance,
   &::Iris::_SocketInfo_default_instance_._instance,
+  &::Iris::_VersionInfo_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_Iris_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -131,26 +153,28 @@ const char descriptor_table_protodef_Iris_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "ERROR\020\001\"-\n\nDataBuffer\022\014\n\004data\030\001 \001(\014\022\021\n\ts"
   "ock_port\030\002 \001(\r\"1\n\021NetworkParameters\022\034\n\024f"
   "rameLossProbability\030\001 \001(\002\"\037\n\nSocketInfo\022"
-  "\021\n\tsock_port\030\001 \001(\r2\325\002\n\013TestService\0220\n\nPu"
-  "tMessage\022\020.Iris.DataBuffer\032\020.Iris.Status"
-  "Code\0220\n\nGetMessage\022\020.Iris.SocketInfo\032\020.I"
-  "ris.DataBuffer\022A\n\024SetNetworkParameters\022\027"
-  ".Iris.NetworkParameters\032\020.Iris.StatusCod"
-  "e\0226\n\004Kill\022\026.google.protobuf.Empty\032\026.goog"
-  "le.protobuf.Empty\0222\n\014CreateSocket\022\020.Iris"
-  ".SocketInfo\032\020.Iris.StatusCode\0223\n\rDestroy"
-  "Socket\022\020.Iris.SocketInfo\032\020.Iris.StatusCo"
-  "de2;\n\007NetPipe\0220\n\nPutMessage\022\020.Iris.DataB"
-  "uffer\032\020.Iris.StatusCodeb\006proto3"
+  "\021\n\tsock_port\030\001 \001(\r\"\036\n\013VersionInfo\022\017\n\007ver"
+  "sion\030\001 \001(\t2\216\003\n\013TestService\0220\n\nPutMessage"
+  "\022\020.Iris.DataBuffer\032\020.Iris.StatusCode\0220\n\n"
+  "GetMessage\022\020.Iris.SocketInfo\032\020.Iris.Data"
+  "Buffer\022A\n\024SetNetworkParameters\022\027.Iris.Ne"
+  "tworkParameters\032\020.Iris.StatusCode\0226\n\004Kil"
+  "l\022\026.google.protobuf.Empty\032\026.google.proto"
+  "buf.Empty\0222\n\014CreateSocket\022\020.Iris.SocketI"
+  "nfo\032\020.Iris.StatusCode\0223\n\rDestroySocket\022\020"
+  ".Iris.SocketInfo\032\020.Iris.StatusCode\0227\n\nGe"
+  "tVersion\022\026.google.protobuf.Empty\032\021.Iris."
+  "VersionInfo2;\n\007NetPipe\0220\n\nPutMessage\022\020.I"
+  "ris.DataBuffer\032\020.Iris.StatusCodeb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Iris_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fempty_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Iris_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Iris_2eproto = {
-    false, false, 671, descriptor_table_protodef_Iris_2eproto,
+    false, false, 760, descriptor_table_protodef_Iris_2eproto,
     "Iris.proto",
-    &descriptor_table_Iris_2eproto_once, descriptor_table_Iris_2eproto_deps, 1, 4,
+    &descriptor_table_Iris_2eproto_once, descriptor_table_Iris_2eproto_deps, 1, 5,
     schemas, file_default_instances, TableStruct_Iris_2eproto::offsets,
     file_level_metadata_Iris_2eproto, file_level_enum_descriptors_Iris_2eproto,
     file_level_service_descriptors_Iris_2eproto,
@@ -958,6 +982,209 @@ void SocketInfo::InternalSwap(SocketInfo* other) {
       file_level_metadata_Iris_2eproto[3]);
 }
 
+// ===================================================================
+
+class VersionInfo::_Internal {
+ public:
+};
+
+VersionInfo::VersionInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Iris.VersionInfo)
+}
+VersionInfo::VersionInfo(const VersionInfo& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  VersionInfo* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.version_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _impl_.version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.version_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_version().empty()) {
+    _this->_impl_.version_.Set(from._internal_version(), 
+      _this->GetArenaForAllocation());
+  }
+  // @@protoc_insertion_point(copy_constructor:Iris.VersionInfo)
+}
+
+inline void VersionInfo::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.version_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.version_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+
+VersionInfo::~VersionInfo() {
+  // @@protoc_insertion_point(destructor:Iris.VersionInfo)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void VersionInfo::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.version_.Destroy();
+}
+
+void VersionInfo::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void VersionInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:Iris.VersionInfo)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.version_.ClearToEmpty();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* VersionInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // string version = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          auto str = _internal_mutable_version();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "Iris.VersionInfo.version"));
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* VersionInfo::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Iris.VersionInfo)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string version = 1;
+  if (!this->_internal_version().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_version().data(), static_cast<int>(this->_internal_version().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "Iris.VersionInfo.version");
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_version(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Iris.VersionInfo)
+  return target;
+}
+
+size_t VersionInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Iris.VersionInfo)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string version = 1;
+  if (!this->_internal_version().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_version());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData VersionInfo::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    VersionInfo::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*VersionInfo::GetClassData() const { return &_class_data_; }
+
+
+void VersionInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<VersionInfo*>(&to_msg);
+  auto& from = static_cast<const VersionInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Iris.VersionInfo)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_version().empty()) {
+    _this->_internal_set_version(from._internal_version());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void VersionInfo::CopyFrom(const VersionInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Iris.VersionInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool VersionInfo::IsInitialized() const {
+  return true;
+}
+
+void VersionInfo::InternalSwap(VersionInfo* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.version_, lhs_arena,
+      &other->_impl_.version_, rhs_arena
+  );
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata VersionInfo::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Iris_2eproto_getter, &descriptor_table_Iris_2eproto_once,
+      file_level_metadata_Iris_2eproto[4]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace Iris
 PROTOBUF_NAMESPACE_OPEN
@@ -976,6 +1203,10 @@ Arena::CreateMaybeMessage< ::Iris::NetworkParameters >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Iris::SocketInfo*
 Arena::CreateMaybeMessage< ::Iris::SocketInfo >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Iris::SocketInfo >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Iris::VersionInfo*
+Arena::CreateMaybeMessage< ::Iris::VersionInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Iris::VersionInfo >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 
