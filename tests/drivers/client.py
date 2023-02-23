@@ -55,6 +55,38 @@ class IrisClient:
             logger.error(f"Failed to get version: {e}")
             return ""
 
+    def create_socket(self, port: int) -> bool:
+        """
+        Creates a socket on the IrisClient
+        Args:
+            port: The port to create the socket on
+
+        Returns:
+            None
+        """
+        try:
+            self._rpc_stub.CreateSocket(Iris_pb2.SocketInfo(sock_port=port), timeout=self.DEFAULT_RPC_TIMEOUT)
+            return True
+        except grpc.RpcError as e:
+            logger.error(f"Failed to create socket: {e}")
+            return False
+
+    def destroy_socket(self, port: int) -> bool:
+        """
+        Destroys a socket on the IrisClient
+        Args:
+            port: The port to destroy the socket on
+
+        Returns:
+            None
+        """
+        try:
+            self._rpc_stub.DestroySocket(Iris_pb2.SocketInfo(sock_port=port), timeout=self.DEFAULT_RPC_TIMEOUT)
+            return True
+        except grpc.RpcError as e:
+            logger.error(f"Failed to destroy socket: {e}")
+            return False
+
 
 if __name__ == "__main__":
     client = IrisClient(50051, 50052, attach=True)

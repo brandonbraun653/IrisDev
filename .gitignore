@@ -3,3 +3,4 @@ build/
 .idea/
 .conda/
 __pycache__
+.pytest_cache/
